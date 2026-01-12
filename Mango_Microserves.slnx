@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Folder Name="/FrontEnd/" />
+  <Folder Name="/Gateway/" />
+  <Folder Name="/Integration/" />
+  <Folder Name="/Services/" />
+</Solution>
