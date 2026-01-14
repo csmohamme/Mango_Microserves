@@ -27,7 +27,7 @@ namespace Mango.Services.CouponAPI.Controllers
             try
             {
                 IEnumerable<Coupon> coupons = _dbContext.Coupons.ToList();
-                _responseDto.Result = coupons.Adapt<CouponDto>();
+                _responseDto.Result = coupons.Adapt<IEnumerable<CouponDto>>();
             }
             catch (Exception ex)
             {
@@ -52,6 +52,55 @@ namespace Mango.Services.CouponAPI.Controllers
                 _responseDto.IsSuccess = false;
                 _responseDto.Message = ex.Message;
             }
+            return _responseDto;
+        }
+
+        // Get coupon by code
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDto GetByCode (string code)
+        {
+            try
+            {
+                Coupon coupon = _dbContext.Coupons.FirstOrDefault(c => c.CouponCode.ToUpper() == code.ToUpper());
+                if(coupon == null)
+                {
+                    _responseDto.IsSuccess = false;
+                }
+
+                _responseDto.Result = coupon.Adapt<CouponDto>();
+
+            }
+            catch(Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.Message = ex.Message;
+            }
+            return _responseDto;
+        }
+
+        // Create coupon
+        [HttpPost]
+        [Route("CreateCoupon")]
+        public ResponseDto Post([FromBody] CouponDto dto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Coupon coupon = dto.Adapt<Coupon>();
+                    _dbContext.Add(coupon);
+                    _dbContext.SaveChanges();
+
+                    _responseDto.Result = coupon.Adapt<CouponDto>();
+                }
+            }
+            catch(Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.Message = ex.Message;
+            }
+
             return _responseDto;
         }
     }
