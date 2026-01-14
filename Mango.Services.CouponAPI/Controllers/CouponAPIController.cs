@@ -45,7 +45,7 @@ namespace Mango.Services.CouponAPI.Controllers
             try
             {
                 Coupon coupon = _dbContext.Coupons.First(c => c.CouponId == Id);
-                _responseDto.Result= coupon.Adapt<CouponDto>();
+                _responseDto.Result = coupon.Adapt<CouponDto>();
             }
             catch (Exception ex)
             {
@@ -58,12 +58,12 @@ namespace Mango.Services.CouponAPI.Controllers
         // Get coupon by code
         [HttpGet]
         [Route("GetByCode/{code}")]
-        public ResponseDto GetByCode (string code)
+        public ResponseDto GetByCode(string code)
         {
             try
             {
                 Coupon coupon = _dbContext.Coupons.FirstOrDefault(c => c.CouponCode.ToUpper() == code.ToUpper());
-                if(coupon == null)
+                if (coupon == null)
                 {
                     _responseDto.IsSuccess = false;
                 }
@@ -71,7 +71,7 @@ namespace Mango.Services.CouponAPI.Controllers
                 _responseDto.Result = coupon.Adapt<CouponDto>();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _responseDto.IsSuccess = false;
                 _responseDto.Message = ex.Message;
@@ -81,7 +81,6 @@ namespace Mango.Services.CouponAPI.Controllers
 
         // Create coupon
         [HttpPost]
-        [Route("CreateCoupon")]
         public ResponseDto Post([FromBody] CouponDto dto)
         {
             try
@@ -94,6 +93,45 @@ namespace Mango.Services.CouponAPI.Controllers
 
                     _responseDto.Result = coupon.Adapt<CouponDto>();
                 }
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.Message = ex.Message;
+            }
+
+            return _responseDto;
+        }
+
+        // Update coupon
+        [HttpPut]
+        public ResponseDto Put([FromBody] CouponDto dto)
+        {
+            try
+            {
+                Coupon coupon = dto.Adapt<Coupon>();
+
+                _dbContext.Update(coupon);
+                _dbContext.SaveChanges();
+                _responseDto.Result = coupon.Adapt<CouponDto>();
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.Message = ex.Message;
+            }
+
+            return _responseDto;
+        }
+
+        [HttpDelete]
+        public ResponseDto Delete(int Id)
+        {
+            try
+            {
+                Coupon coupon = _dbContext.Coupons.First(c => c.CouponId == Id);
+                _dbContext.Remove(coupon);
+                _dbContext.SaveChanges();
             }
             catch(Exception ex)
             {
