@@ -2,5 +2,7 @@
   <Folder Name="/FrontEnd/" />
   <Folder Name="/Gateway/" />
   <Folder Name="/Integration/" />
-  <Folder Name="/Services/" />
+  <Folder Name="/Services/">
+    <Project Path="Mango.Services.CouponAPI/Mango.Services.CouponAPI.csproj" Id="e17969bd-d0be-4b29-862c-7258e69b14a6" />
+  </Folder>
 </Solution>
