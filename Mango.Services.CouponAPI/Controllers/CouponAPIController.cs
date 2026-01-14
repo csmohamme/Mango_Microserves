@@ -1,6 +1,7 @@
 ﻿using Mango.Services.CouponAPI.Data;
 using Mango.Services.CouponAPI.Models;
 using Mango.Services.CouponAPI.Models.Dto;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace Mango.Services.CouponAPI.Controllers
             try
             {
                 IEnumerable<Coupon> coupons = _dbContext.Coupons.ToList();
-                _responseDto.Result = coupons;
+                _responseDto.Result = coupons.Adapt<CouponDto>();
             }
             catch (Exception ex)
             {
@@ -44,7 +45,7 @@ namespace Mango.Services.CouponAPI.Controllers
             try
             {
                 Coupon coupon = _dbContext.Coupons.First(c => c.CouponId == Id);
-                _responseDto.Result= coupon;
+                _responseDto.Result= coupon.Adapt<CouponDto>();
             }
             catch (Exception ex)
             {
