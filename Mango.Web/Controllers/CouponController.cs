@@ -14,6 +14,8 @@ namespace Mango.Web.Controllers
         {
             _couponService = couponService;
         }
+
+        // Get All Coupons
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
         {
             List<CouponDto> coupons = new();
@@ -41,6 +43,12 @@ namespace Mango.Web.Controllers
                 TotalPages = totalPages
             };
             return View(viewModel);
+        }
+
+        // Create Coupon
+        public async Task<IActionResult> Create()
+        {
+            return View();
         }
     }
 }

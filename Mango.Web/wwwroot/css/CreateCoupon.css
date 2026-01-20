@@ -1,0 +1,105 @@
+﻿.coupon-icon-large {
+    opacity: 0.8;
+}
+
+.coupon-preview {
+    position: relative;
+    overflow: hidden;
+}
+
+    .coupon-preview:before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(30deg);
+    }
+
+.guideline-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stats-list {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 107, 53, 0.25);
+}
+
+.alert {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+}
+
+/* Form validation styles */
+.input-group .is-invalid {
+    border-color: #dc3545;
+}
+
+.input-group .is-valid {
+    border-color: #198754;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .coupon-preview {
+        margin-bottom: 2rem;
+    }
+
+    .page-header .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .page-header .btn {
+        margin-top: 1rem;
+    }
+}
+
+/* Animation for form elements */
+.form-control, .form-select {
+    transition: all 0.3s ease;
+}
+
+/* Generate code button style */
+#generateCode {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+}
