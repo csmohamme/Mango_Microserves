@@ -7,31 +7,6 @@ function copyCouponCode(code) {
     });
 }
 
-// Delete coupon confirmation
-function deleteCoupon(code) {
-    if (confirm(`Are you sure you want to delete coupon "${code}"?`)) {
-        // AJAX call to delete coupon
-        fetch(`/Coupon/Delete/${code}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    showToast('Success', 'Coupon deleted successfully!', 'success');
-                    setTimeout(() => location.reload(), 1500);
-                } else {
-                    showToast('Error', 'Failed to delete coupon', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showToast('Error', 'An error occurred', 'error');
-            });
-    }
-}
-
 // Change page size
 function changePageSize(size) {
     const url = new URL(window.location.href);

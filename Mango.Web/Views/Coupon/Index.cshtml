@@ -127,9 +127,9 @@
                                         <a asp-controller="Coupon" asp-action="Edit" asp-route-id="@rowNumber" class="btn btn-sm btn-outline-warning">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <button class="btn btn-sm btn-outline-danger">
+                                        <a asp-action="Delete" asp-route-couponId="@item.CouponId" class="btn btn-sm btn-outline-danger">
                                             <i class="bi bi-trash"></i>
-                                        </button>
+                                        </a>
                                     </div> 
                                 </td>
                             </tr>
