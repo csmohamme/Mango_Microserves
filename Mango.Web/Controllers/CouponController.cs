@@ -15,12 +15,12 @@ namespace Mango.Web.Controllers
             _couponService = couponService;
         }
 
-        // Get All Coupons
+        // ==============================================  Get All Coupons ============================================== 
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
         {
             List<CouponDto> coupons = new();
             ResponseDto? response = await _couponService.GetAllCouponAsync();
-            if(response != null && response.IsSuccess)
+            if (response != null && response.IsSuccess)
             {
                 coupons = JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
             }
@@ -45,10 +45,60 @@ namespace Mango.Web.Controllers
             return View(viewModel);
         }
 
-        // Create Coupon
+        // ============================================== Create Coupon ============================================== 
         public async Task<IActionResult> Create()
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CouponDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                ResponseDto? response = await _couponService.CreateCouponAsync(model);
+                if (response != null && response.IsSuccess)
+                {
+                    response.Message = "Coupon created successfully.";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(model);
+        }
+
+        // ============================================== Delete Coupon ============================================== 
+        public async Task<IActionResult> Delete(int couponId)
+        {
+                ResponseDto? response = await _couponService.GetCouponByIdAsync(couponId);
+                if(response != null && response.IsSuccess)
+                {
+                    CouponDto? coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
+                    return View(coupon);
+                }
+            else
+            {
+                TempData["ErrorMessage"] = "Coupon NOt Found";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(CouponDto coupon)
+        {
+            try{
+
+            ResponseDto? response = await _couponService.DeleteCouponAsync(coupon.CouponId);
+            if(response != null && response.IsSuccess)
+            {
+                TempData["SuccessMessage"] = "Coupon Deleted Successfully";
+            }
+            }catch(Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }
