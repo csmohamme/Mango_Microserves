@@ -1,5 +1,4 @@
-﻿
-@model CouponsViewModel
+﻿@model CouponsViewModel
 @{
     ViewData["Title"] = "Manage Coupons";
 }
@@ -59,7 +58,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <!-- Coupons Table -->
         <div class="feature-card p-4">
@@ -79,7 +78,7 @@
                         @{
                             int index = 0;
                         }
-                        @foreach(var item in Model.Coupons)
+                        @foreach (var item in Model.Coupons)
                         {
                             var rowNumber = ((Model.CurrentPage - 1) * Model.PageSize) + (++index);
                             var isActive = item.MinAmount > 0;
@@ -92,7 +91,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                       <div class="coupon-icon me-3">
+                                        <div class="coupon-icon me-3">
                                             <i class="bi bi-ticket-perforated text-warning" style="font-size: 1.5rem;"></i>
                                         </div>
                                         <div>
@@ -103,20 +102,20 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                         <span class="badge bg-success bg-opacity-10 text-success ">
+                                        <span class="badge bg-success bg-opacity-10 text-success ">
                                             <i class="bi bi-currency-dollar"></i>
                                             @item.DiscountAmount.ToString("N2")
-                                        </span> 
+                                        </span>
                                     </div>
                                 </td>
                                 <td>
-                                   <span class="badge bg-secondary bg-opacity-10 text-dark p-2">
+                                    <span class="badge bg-secondary bg-opacity-10 text-dark p-2">
                                         <i class="bi bi-cart-check"></i>
                                         @item.MinAmount.ToString("N2")
-                                    </span> 
+                                    </span>
                                 </td>
                                 <td>
-                                  
+
                                     <span class="badge @statusClass">@statusText</span>
                                 </td>
                                 <td>
@@ -130,13 +129,13 @@
                                         <a asp-action="Delete" asp-route-couponId="@item.CouponId" class="btn btn-sm btn-outline-danger">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                    </div> 
+                                    </div>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                
+
                 @if (!Model.Coupons.Any())
                 {
                     <div class="text-center py-5">
@@ -158,32 +157,32 @@
                 <nav aria-label="Coupon pagination" class="mt-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="text-muted">
-                            Showing @(((Model.CurrentPage - 1) * Model.PageSize) + 1) to 
-                            @Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount) 
+                            Showing @(((Model.CurrentPage - 1) * Model.PageSize) + 1) to
+                            @Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount)
                             of @Model.TotalCount entries
                         </div>
-                        
+
                         <ul class="pagination mb-0">
                             <!-- Previous Page -->
                             <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-                                <a class="page-link" 
-                                   asp-controller="Coupon" 
-                                   asp-action="Index" 
+                                <a class="page-link"
+                                   asp-controller="Coupon"
+                                   asp-action="Index"
                                    asp-route-page="@(Model.CurrentPage - 1)">
                                     <i class="bi bi-chevron-left"></i>
                                 </a>
                             </li>
-                            
+
                             <!-- Page Numbers -->
                             @for (int i = 1; i <= Model.TotalPages; i++)
                             {
-                                if (i == 1 || i == Model.TotalPages || 
-                                    (i >= Model.CurrentPage - 2 && i <= Model.CurrentPage + 2))
+                                if (i == 1 || i == Model.TotalPages ||
+                                (i >= Model.CurrentPage - 2 && i <= Model.CurrentPage + 2))
                                 {
                                     <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                                        <a class="page-link" 
-                                           asp-controller="Coupon" 
-                                           asp-action="Index" 
+                                        <a class="page-link"
+                                           asp-controller="Coupon"
+                                           asp-action="Index"
                                            asp-route-page="@i">@i</a>
                                     </li>
                                 }
@@ -194,23 +193,23 @@
                                     </li>
                                 }
                             }
-                            
+
                             <!-- Next Page -->
                             <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-                                <a class="page-link" 
-                                   asp-controller="Coupon" 
-                                   asp-action="Index" 
+                                <a class="page-link"
+                                   asp-controller="Coupon"
+                                   asp-action="Index"
                                    asp-route-page="@(Model.CurrentPage + 1)">
                                     <i class="bi bi-chevron-right"></i>
                                 </a>
                             </li>
                         </ul>
-                        
+
                         <div class="d-flex align-items-center">
                             <span class="me-2 text-muted">Items per page:</span>
-                            <select class="form-select form-select-sm" style="width: auto;" 
+                            <select class="form-select form-select-sm" style="width: auto;"
                                     onchange="changePageSize(this.value)">
-                                <option value="5" selected ="@(Model.PageSize == 5)">5</option>
+                                <option value="5" selected="@(Model.PageSize == 5)">5</option>
                                 <option value="10" selected="@(Model.PageSize == 10)">10</option>
                                 <option value="20" selected="@(Model.PageSize == 20)">20</option>
                                 <option value="50" selected="@(Model.PageSize == 50)">50</option>
@@ -218,17 +217,17 @@
                         </div>
                     </div>
                 </nav>
-            } 
+            }
         </div>
 
         <!-- Quick Stats -->
-         <div class="row mt-4">
+        <div class="row mt-4">
             <div class="col-md-4">
                 <div class="feature-card p-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="text-muted mb-1">Average Discount</h6>
-                            <h4 class="mb-0">@Model.Coupons.Average(c => c.DiscountAmount).ToString("C")</h4>
+                            <h4 class="mb-0">@(Model.Coupons.Any() ? Model.Coupons.Average(c => c.DiscountAmount).ToString("C") : "0.00")</h4>
                         </div>
                         <i class="bi bi-graph-up text-primary" style="font-size: 2rem;"></i>
                     </div>
@@ -239,7 +238,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="text-muted mb-1">Minimum Purchase Avg</h6>
-                            <h4 class="mb-0">@Model.Coupons.Average(c => c.MinAmount).ToString("C")</h4>
+                            <h4 class="mb-0">@(Model.Coupons.Any()?Model.Coupons.Average(c => c.MinAmount).ToString("C"): "0.00")</h4>
                         </div>
                         <i class="bi bi-cart-check text-success" style="font-size: 2rem;"></i>
                     </div>
@@ -250,13 +249,15 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="text-muted mb-1">Active Coupons</h6>
-                            <h4 class="mb-0">@Model.Coupons.Count(c => c.MinAmount > 0)</h4>
+                            <h4 class="mb-0">
+                                @(Model.Coupons.Any()? Model.Coupons.Count(c => c.MinAmount > 0): "0.00")
+                            </h4>
                         </div>
                         <i class="bi bi-check-circle text-warning" style="font-size: 2rem;"></i>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 <script src="~/js/coupons.js" asp-append-version="true"></script>
