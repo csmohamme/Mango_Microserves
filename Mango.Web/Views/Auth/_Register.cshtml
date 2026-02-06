@@ -1,4 +1,6 @@
-﻿<div class="tab-pane fade" id="register" role="tabpanel">
+﻿@model RegistrationRequestDto
+
+<div class="tab-pane fade" id="register" role="tabpanel">
 
     <div class="auth-form-header mb-4">
         <h3>Create New Account</h3>
@@ -15,10 +17,7 @@
                 <span class="input-group-text">
                     <i class="bi bi-person"></i>
                 </span>
-                <input type="text" class="form-control"
-                       id="registerName" name="Name"
-                       placeholder="Enter your full name"
-                       required>
+                <input type="text" class="form-control" asp-for="Name" placeholder="Enter your full name" required>
             </div>
         </div>
 
@@ -31,10 +30,7 @@
                 <span class="input-group-text">
                     <i class="bi bi-at"></i>
                 </span>
-                <input type="email" class="form-control"
-                       id="registerEmail" name="Email"
-                       placeholder="Enter your email"
-                       required>
+                <input type="email" class="form-control" asp-for="Email" placeholder="Enter your email" required>
             </div>
         </div>
 
@@ -44,13 +40,9 @@
                 <i class="bi bi-telephone me-1"></i> Phone Number
             </label>
             <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-phone"></i>
-                </span>
-                <input type="tel" class="form-control"
-                       id="registerPhone" name="PhoneNumber"
-                       placeholder="Enter your phone number"
-                       required>
+                <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Enter your phone number" required>
+                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
             </div>
         </div>
 
@@ -60,13 +52,8 @@
                 <i class="bi bi-lock me-1"></i> Password
             </label>
             <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-key"></i>
-                </span>
-                <input type="password" class="form-control"
-                       id="registerPassword" name="Password"
-                       placeholder="Create a strong password"
-                       required>
+                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                <input type="password" class="form-control" id="registerPassword" asp-for="Password" placeholder="Create a strong password" required>
                 <button class="btn btn-outline-secondary" type="button"
                         id="toggleRegisterPassword">
                     <i class="bi bi-eye"></i>
@@ -91,10 +78,7 @@
                 <span class="input-group-text">
                     <i class="bi bi-key-fill"></i>
                 </span>
-                <input type="password" class="form-control"
-                       id="registerConfirmPassword" name="ConfirmPassword"
-                       placeholder="Confirm your password"
-                       required>
+                <input type="password" class="form-control" id="registerConfirmPassword" name="ConfirmPassword" placeholder="Confirm your password" required>
             </div>
             <div class="mt-2">
                 <small class="text-success d-none" id="passwordMatch">

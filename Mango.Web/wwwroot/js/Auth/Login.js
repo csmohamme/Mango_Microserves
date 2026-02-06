@@ -15,12 +15,12 @@ document.getElementById('toggleLoginPassword').addEventListener('click', functio
 });
 
 // Form validation
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value.trim();
+//document.getElementById('loginForm').addEventListener('submit', function (e) {
+//    const username = document.getElementById('loginUsername').value.trim();
+//    const password = document.getElementById('loginPassword').value.trim();
 
-    if (!username || !password) {
-        e.preventDefault();
-        showToast('Error', 'Please fill in all required fields', 'danger');
-    }
-});
+//    if (!username || !password) {
+//        e.preventDefault();
+//        showToast('Error', 'Please fill in all required fields', 'danger');
+//    }
+//});

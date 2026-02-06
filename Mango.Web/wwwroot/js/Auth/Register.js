@@ -89,25 +89,25 @@ function checkPasswordMatch() {
 }
 
 // Form validation
-document.getElementById('registerForm').addEventListener('submit', function (e) {
-    const name = document.getElementById('registerName').value.trim();
-    const email = document.getElementById('registerEmail').value.trim();
-    const phone = document.getElementById('registerPhone').value.trim();
-    const password = document.getElementById('registerPassword').value;
-    const confirmPassword = document.getElementById('registerConfirmPassword').value;
-    const agreeTerms = document.getElementById('agreeTerms').checked;
+//document.getElementById('registerForm').addEventListener('submit', function (e) {
+//    const name = document.getElementById('registerName').value.trim();
+//    const email = document.getElementById('registerEmail').value.trim();
+//    const phone = document.getElementById('registerPhone').value.trim();
+//    const password = document.getElementById('registerPassword').value;
+//    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+//    const agreeTerms = document.getElementById('agreeTerms').checked;
 
-    let errors = [];
+//    let errors = [];
 
-    if (!name) errors.push('Name is required');
-    if (!email) errors.push('Email is required');
-    if (!phone) errors.push('Phone number is required');
-    if (password.length < 6) errors.push('Password must be at least 6 characters');
-    if (password !== confirmPassword) errors.push('Passwords do not match');
-    if (!agreeTerms) errors.push('You must agree to the terms');
+//    if (!name) errors.push('Name is required');
+//    if (!email) errors.push('Email is required');
+//    if (!phone) errors.push('Phone number is required');
+//    if (password.length < 6) errors.push('Password must be at least 6 characters');
+//    if (password !== confirmPassword) errors.push('Passwords do not match');
+//    if (!agreeTerms) errors.push('You must agree to the terms');
 
-    if (errors.length > 0) {
-        e.preventDefault();
-        showToast('Validation Error', errors.join('<br>'), 'danger');
-    }
-});
+//    if (errors.length > 0) {
+//        e.preventDefault();
+//        showToast('Validation Error', errors.join('<br>'), 'danger');
+//    }
+//});

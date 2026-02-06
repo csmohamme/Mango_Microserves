@@ -64,24 +64,29 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Auth" asp-action="Index">
-                                <i class="bi bi-box-arrow-in-right"></i> Sign In/ Sign Up
-                            </a>
-                        </li>
-                    </ul>
-                    @if (ViewBag.Role == 1)
-                    {
-                        <div class="d-flex align-items-center">
-                            <a href="#" class="nav-link me-3">
-                                <i class="bi bi-bell"></i>
-                                <span class="nav-badge">3</span>
-                            </a>
-                            <a href="#" class="nav-link me-3">
-                                <i class="bi bi-cart"></i>
-                                <span class="nav-badge">5</span>
-                            </a>
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="nav-link me-3">
+                            <i class="bi bi-bell"></i>
+                            <span class="nav-badge">3</span>
+                        </a>
+                        <a href="#" class="nav-link me-3">
+                            <i class="bi bi-cart"></i>
+                            <span class="nav-badge">5</span>
+                        </a>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <ul class="navbar-nav me-auto">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Auth" asp-action="Index">
+                                        <i class="bi bi-box-arrow-in-right"></i> Sign In/ Sign Up
+                                    </a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
                             <div class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                                     <img src="https://ui-avatars.com/api/?name=User&background=FF6B35&color=fff"
@@ -92,12 +97,15 @@
                                     <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" asp-controller="Auth" asp-action="Logout">
+                                            <i class="bi bi-box-arrow-right"></i> Logout
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
-                        </div>
-                    }
-                    
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

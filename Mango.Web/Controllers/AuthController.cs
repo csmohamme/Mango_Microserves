@@ -21,16 +21,24 @@ namespace Mango.Web.Controllers
         }
 
         // ============================================== Login ============================================= 
-        [HttpGet]
-        public async Task<IActionResult> Login()
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginRequestDto loginRequestDto)
         {
             return View();
         }
 
         // ============================================== Register ============================================= 
 
-        [HttpGet]
-        public async Task<IActionResult> Register()
+        [HttpPost]
+        public async Task<IActionResult> Register(RegistrationRequestDto registerRequestDto)
+        {
+            return View();
+        }
+
+        // ============================================== Logout ============================================= 
+
+        [HttpPost]
+        public async Task<IActionResult> Logout(RegistrationRequestDto registerRequestDto)
         {
             return View();
         }
