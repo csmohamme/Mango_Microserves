@@ -14,8 +14,9 @@ builder.Services.AddHttpClient();
 // Coupon Service will use HttpClient
 builder.Services.AddHttpClient<ICouponService,CouponService>();
 
-// Configure CouponAPIBase from appsettings.json
+// Configure APIBase from appsettings.json
 SD.CouponAPIBase = builder.Configuration["ServiceURLs:CouponAPI"];
+SD.AuthAPIBase = builder.Configuration["ServiceURLs:AuthAPI"];
 
 // Dependency Injection for BaseService and CouponService
 builder.Services.AddScoped<IBaseService, BaseService>();
