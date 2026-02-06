@@ -11,16 +11,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 
-// Coupon Service will use HttpClient
+// all Service will use HttpClient
 builder.Services.AddHttpClient<ICouponService,CouponService>();
+builder.Services.AddHttpClient<IAuthService,AuthService>();
 
 // Configure APIBase from appsettings.json
 SD.CouponAPIBase = builder.Configuration["ServiceURLs:CouponAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceURLs:AuthAPI"];
 
-// Dependency Injection for BaseService and CouponService
+// Dependency Injection for BaseService , CouponService and AuthService
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
