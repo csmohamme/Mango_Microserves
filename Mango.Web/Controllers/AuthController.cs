@@ -13,6 +13,13 @@ namespace Mango.Web.Controllers
             _authService = authService;
         }
 
+        // ============================================== Index ============================================= 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
         // ============================================== Login ============================================= 
         [HttpGet]
         public async Task<IActionResult> Login()

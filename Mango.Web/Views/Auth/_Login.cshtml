@@ -1,0 +1,82 @@
+﻿<div class="tab-pane fade show active" id="login" role="tabpanel">
+<div class="auth-form-header mb-4">
+    <h3>Sign In to Your Account</h3>
+    <p class="text-muted">Enter your credentials to continue</p>
+</div>
+
+<form id="loginForm" method="post" asp-controller="Auth" asp-action="Login">
+    <!-- Username/Email -->
+    <div class="form-group mb-3">
+        <label for="loginUsername" class="form-label">
+            <i class="bi bi-person me-1"></i> Username or Email
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-envelope"></i>
+            </span>
+            <input type="text" class="form-control"
+                   id="loginUsername" name="UserName"
+                   placeholder="Enter your username or email"
+                   required>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group mb-3">
+        <label for="loginPassword" class="form-label">
+            <i class="bi bi-lock me-1"></i> Password
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-key"></i>
+            </span>
+            <input type="password" class="form-control"
+                   id="loginPassword" name="Password"
+                   placeholder="Enter your password"
+                   required>
+            <button class="btn btn-outline-secondary" type="button"
+                    id="toggleLoginPassword">
+                <i class="bi bi-eye"></i>
+            </button>
+        </div>
+        <div class="form-text text-end">
+            <a href="#forgot-password" class="text-decoration-none"
+               id="forgotPasswordLink">
+                Forgot password?
+            </a>
+        </div>
+    </div>
+
+    <!-- Remember Me -->
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox"
+               id="rememberMe">
+        <label class="form-check-label" for="rememberMe">
+            Remember me
+        </label>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary w-100 mb-3">
+        <i class="bi bi-box-arrow-in-right me-2"></i>
+        Sign In
+    </button>
+
+    <!-- Social Login -->
+    <div class="divider">
+        <span class="divider-text">Or continue with</span>
+    </div>
+
+    <div class="social-login-buttons">
+        <button type="button" class="btn btn-outline-secondary w-100 mb-2">
+            <i class="bi bi-google me-2"></i>
+            Continue with Google
+        </button>
+        <button type="button" class="btn btn-outline-secondary w-100">
+            <i class="bi bi-facebook me-2"></i>
+            Continue with Facebook
+        </button>
+    </div>
+</form>
+</div>
+<script src="~/js/auth/Login.js"></script>
