@@ -23,6 +23,10 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSett
 
 // 7. Register AuthService
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+// 8. Register JWTTokenGenerator
+builder.Services.AddScoped<IJWTTokenGenerator, JWTTokenGenerator>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
