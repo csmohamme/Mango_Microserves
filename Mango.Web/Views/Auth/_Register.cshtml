@@ -1,7 +1,6 @@
 ﻿@model RegistrationRequestDto
 
 <div class="tab-pane fade" id="register" role="tabpanel">
-
     <div class="auth-form-header mb-4">
         <h3>Create New Account</h3>
         <p class="text-muted">Join our community today</p>
@@ -43,6 +42,29 @@
                 <span class="input-group-text"><i class="bi bi-phone"></i></span>
                 <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Enter your phone number" required>
                 <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+            </div>
+        </div>
+
+        <!-- Role Selection -->
+        <div class="form-group mb-3">
+            <label for="registerRole" class="form-label">
+                <i class="bi bi-person-badge me-1"></i> Select Role
+            </label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-shield-check"></i>
+                </span>
+                <select class="form-select" asp-for="RoleName" id="registerRole" asp-items="@ViewBag.RoleList" required>
+                    <option disabled selected>-- Select Role --</option>
+                </select>
+            </div>
+            <div class="form-text">
+                <small class="text-muted">
+                    <i class="bi bi-info-circle me-1"></i>
+                    <span id="roleDescription">
+                        Select your role to determine your access level
+                    </span>
+                </small>
             </div>
         </div>
 
@@ -121,4 +143,4 @@
     </form>
 </div>
 
-<script src="~/js/auth/Register.js"></script>
+<script src="~/js/Auth/Register.js"></script>

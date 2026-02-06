@@ -25,7 +25,6 @@ passwordInput.addEventListener('input', function () {
 
 confirmPasswordInput.addEventListener('input', checkPasswordMatch);
 
-// Function to check password strength
 function checkPasswordStrength(password) {
     let strength = 0;
     const bar = document.getElementById('passwordStrengthBar');
@@ -66,7 +65,6 @@ function checkPasswordStrength(password) {
     }
 }
 
-// Check if passwords match
 function checkPasswordMatch() {
     const password = passwordInput.value;
     const confirmPassword = confirmPasswordInput.value;
@@ -88,11 +86,39 @@ function checkPasswordMatch() {
     }
 }
 
+// Role selection change handler
+const roleSelect = document.getElementById('registerRole');
+const roleDescription = document.getElementById('roleDescription');
+
+roleSelect.addEventListener('change', function () {
+    updateRoleDescription(this.value);
+});
+
+function updateRoleDescription(role) {
+    switch (role) {
+        case '@ViewBag.RoleAdmin':
+            roleDescription.innerHTML = '<strong>Admin:</strong> Full access to all system features';
+            break;
+        case '@ViewBag.RoleCustomer':
+            roleDescription.innerHTML = '<strong>Customer:</strong> Access to shopping and personal account features';
+            break;
+        default:
+            roleDescription.textContent = 'Select your role to determine your access level';
+            break;
+    }
+}
+
+// Initialize role description
+if (roleSelect.value) {
+    updateRoleDescription(roleSelect.value);
+}
+
 // Form validation
 //document.getElementById('registerForm').addEventListener('submit', function (e) {
 //    const name = document.getElementById('registerName').value.trim();
 //    const email = document.getElementById('registerEmail').value.trim();
 //    const phone = document.getElementById('registerPhone').value.trim();
+//    const role = document.getElementById('registerRole').value;
 //    const password = document.getElementById('registerPassword').value;
 //    const confirmPassword = document.getElementById('registerConfirmPassword').value;
 //    const agreeTerms = document.getElementById('agreeTerms').checked;
@@ -102,6 +128,7 @@ function checkPasswordMatch() {
 //    if (!name) errors.push('Name is required');
 //    if (!email) errors.push('Email is required');
 //    if (!phone) errors.push('Phone number is required');
+//    if (!role) errors.push('Role is required');
 //    if (password.length < 6) errors.push('Password must be at least 6 characters');
 //    if (password !== confirmPassword) errors.push('Passwords do not match');
 //    if (!agreeTerms) errors.push('You must agree to the terms');
@@ -111,3 +138,41 @@ function checkPasswordMatch() {
 //        showToast('Validation Error', errors.join('<br>'), 'danger');
 //    }
 //});
+
+// Toast notification function
+function showToast(title, message, type) {
+    // Create toast container if it doesn't exist
+    let toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+        document.body.appendChild(toastContainer);
+    }
+
+    // Create toast element
+    const toastId = 'toast-' + Date.now();
+    const toastHtml = `
+                <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header bg-${type} text-white">
+                        <i class="bi bi-${type === 'danger' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>
+                        <strong class="me-auto">${title}</strong>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                </div>
+            `;
+
+    toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+
+    // Show the toast
+    const toastElement = document.getElementById(toastId);
+    const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+    toast.show();
+
+    // Remove toast after it's hidden
+    toastElement.addEventListener('hidden.bs.toast', function () {
+        this.remove();
+    });
+}
