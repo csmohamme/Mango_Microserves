@@ -19,10 +19,11 @@ builder.Services.AddHttpClient<IAuthService,AuthService>();
 SD.CouponAPIBase = builder.Configuration["ServiceURLs:CouponAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceURLs:AuthAPI"];
 
-// Dependency Injection for BaseService , CouponService and AuthService
+// Dependency Injection for BaseService , CouponService , AuthService and TokenService
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
