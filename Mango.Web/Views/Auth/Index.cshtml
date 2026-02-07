@@ -1,7 +1,19 @@
-﻿@{
+﻿@model AuthVM
+@{
     ViewData["Title"] = "Welcome to Mango";
     Layout = "_AuthLayout";
+
+    var activeTab = "login";
+    if (ViewBag.ActiveTab != null)
+    {
+        activeTab = ViewBag.ActiveTab;
+    }
+    if (TempData["ActiveTab"] != null)
+    {
+        activeTab = TempData["ActiveTab"].ToString();
+    }
 }
+
 <link rel="stylesheet" href="~/css/Auth/Index.css" />
 <div class="auth-container">
     <!-- Background Elements -->
@@ -86,14 +98,15 @@
                                 <!-- Tabs Navigation -->
                                 <ul class="nav nav-pills nav-fill mb-4" id="authTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="login-tab" data-bs-toggle="tab"
+                                        <button class="nav-link @(activeTab == "login" ? "active" : "")" id="login-tab" data-bs-toggle="tab"
                                                 data-bs-target="#login" type="button" role="tab">
+
                                             <i class="bi bi-box-arrow-in-right me-2"></i>
                                             Sign In
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="register-tab" data-bs-toggle="tab"
+                                        <button class="nav-link @(activeTab == "register" ? "active" : "")" id="register-tab" data-bs-toggle="tab"
                                                 data-bs-target="#register" type="button" role="tab">
                                             <i class="bi bi-person-plus me-2"></i>
                                             Sign Up
@@ -104,13 +117,16 @@
                                 <!-- Tab Content -->
                                 <div class="tab-content" id="authTabContent">
                                     <!-- Login Form -->
-                                    
-                                        <partial name="_Login" />
-                                    
+                                    <div class="tab-pane fade @(activeTab == "login" ? "show active" : "")" id="login">
+
+                                        <partial name="_Login" model="Model" />
+                                    </div>
 
                                     <!-- Register Form -->
-                                        <partial name="_Register" />
-                                    
+                                    <div class="tab-pane fade @(activeTab == "register" ? "show active" : "")" id="register">
+
+                                        <partial name="_Register" model="Model" />
+                                    </div>
                                 </div>
 
                                 <!-- Forgot Password Modal Trigger -->
@@ -138,65 +154,27 @@
         document.addEventListener('DOMContentLoaded', function() {
 
             // Forgot password form
-            document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('resetEmail').value.trim();
+            // document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            //     e.preventDefault();
+            //     const email = document.getElementById('resetEmail').value.trim();
 
-                if (!email) {
-                    showToast('Error', 'Please enter your email address', 'danger');
-                    return;
-                }
+            //     if (!email) {
+            //         showToast('Error', 'Please enter your email address', 'danger');
+            //         return;
+            //     }
 
                 // Simulate API call
-                setTimeout(() => {
-                    showToast('Success', 'Password reset instructions sent to your email', 'success');
-                    bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal')).hide();
-                }, 1500);
-            });
+            //     setTimeout(() => {
+            //         showToast('Success', 'Password reset instructions sent to your email', 'success');
+            //         bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal')).hide();
+            //     }, 1500);
+            // });
 
             // Switch to login tab
             window.switchToLogin = function() {
                 const loginTab = new bootstrap.Tab(document.getElementById('login-tab'));
                 loginTab.show();
             };
-
-            // Toast notification function
-            function showToast(title, message, type) {
-                // Create toast container if it doesn't exist
-                let toastContainer = document.querySelector('.toast-container');
-                if (!toastContainer) {
-                    toastContainer = document.createElement('div');
-                    toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
-                    document.body.appendChild(toastContainer);
-                }
-
-                // Create toast element
-                const toastId = 'toast-' + Date.now();
-                const toastHtml = `
-                    <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header bg-${type} text-white">
-                            <i class="bi bi-${type === 'danger' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>
-                            <strong class="me-auto">${title}</strong>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-                        </div>
-                        <div class="toast-body">
-                            ${message}
-                        </div>
-                    </div>
-                `;
-
-                toastContainer.insertAdjacentHTML('beforeend', toastHtml);
-
-                // Show the toast
-                const toastElement = document.getElementById(toastId);
-                const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
-                toast.show();
-
-                // Remove toast after it's hidden
-                toastElement.addEventListener('hidden.bs.toast', function() {
-                    this.remove();
-                });
-            }
         });
     </script>
 }

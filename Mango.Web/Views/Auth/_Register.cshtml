@@ -1,146 +1,151 @@
-﻿@model RegistrationRequestDto
-
-<div class="tab-pane fade" id="register" role="tabpanel">
-    <div class="auth-form-header mb-4">
-        <h3>Create New Account</h3>
-        <p class="text-muted">Join our community today</p>
-    </div>
-
-    <form id="registerForm" method="post" asp-controller="Auth" asp-action="Register">
-        <!-- Name -->
-        <div class="form-group mb-3">
-            <label for="registerName" class="form-label">
-                <i class="bi bi-person-circle me-1"></i> Full Name
-            </label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-person"></i>
-                </span>
-                <input type="text" class="form-control" asp-for="Name" placeholder="Enter your full name" required>
-            </div>
-        </div>
-
-        <!-- Email -->
-        <div class="form-group mb-3">
-            <label for="registerEmail" class="form-label">
-                <i class="bi bi-envelope me-1"></i> Email Address
-            </label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-at"></i>
-                </span>
-                <input type="email" class="form-control" asp-for="Email" placeholder="Enter your email" required>
-            </div>
-        </div>
-
-        <!-- Phone Number -->
-        <div class="form-group mb-3">
-            <label for="registerPhone" class="form-label">
-                <i class="bi bi-telephone me-1"></i> Phone Number
-            </label>
-            <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Enter your phone number" required>
-                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
-            </div>
-        </div>
-
-        <!-- Role Selection -->
-        <div class="form-group mb-3">
-            <label for="registerRole" class="form-label">
-                <i class="bi bi-person-badge me-1"></i> Select Role
-            </label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-shield-check"></i>
-                </span>
-                <select class="form-select" asp-for="RoleName" id="registerRole" asp-items="@ViewBag.RoleList" required>
-                    <option disabled selected>-- Select Role --</option>
-                </select>
-            </div>
-            <div class="form-text">
-                <small class="text-muted">
-                    <i class="bi bi-info-circle me-1"></i>
-                    <span id="roleDescription">
-                        Select your role to determine your access level
-                    </span>
-                </small>
-            </div>
-        </div>
-
-        <!-- Password -->
-        <div class="form-group mb-3">
-            <label for="registerPassword" class="form-label">
-                <i class="bi bi-lock me-1"></i> Password
-            </label>
-            <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-key"></i></span>
-                <input type="password" class="form-control" id="registerPassword" asp-for="Password" placeholder="Create a strong password" required>
-                <button class="btn btn-outline-secondary" type="button"
-                        id="toggleRegisterPassword">
-                    <i class="bi bi-eye"></i>
-                </button>
-            </div>
-            <div class="password-strength mt-2">
-                <div class="progress" style="height: 5px;">
-                    <div class="progress-bar" id="passwordStrengthBar"></div>
-                </div>
-                <small class="text-muted" id="passwordStrengthText">
-                    Password strength: None
-                </small>
-            </div>
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="form-group mb-4">
-            <label for="registerConfirmPassword" class="form-label">
-                <i class="bi bi-lock-fill me-1"></i> Confirm Password
-            </label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-key-fill"></i>
-                </span>
-                <input type="password" class="form-control" id="registerConfirmPassword" name="ConfirmPassword" placeholder="Confirm your password" required>
-            </div>
-            <div class="mt-2">
-                <small class="text-success d-none" id="passwordMatch">
-                    <i class="bi bi-check-circle-fill"></i> Passwords match
-                </small>
-                <small class="text-danger d-none" id="passwordMismatch">
-                    <i class="bi bi-exclamation-circle-fill"></i> Passwords don't match
-                </small>
-            </div>
-        </div>
-
-        <!-- Terms Agreement -->
-        <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox"
-                   id="agreeTerms" required>
-            <label class="form-check-label" for="agreeTerms">
-                I agree to the
-                <a href="#" class="text-decoration-none">Terms of Service</a>
-                and
-                <a href="#" class="text-decoration-none">Privacy Policy</a>
-            </label>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-success w-100 mb-3">
-            <i class="bi bi-person-plus me-2"></i>
-            Create Account
-        </button>
-
-        <!-- Already have account -->
-        <div class="text-center">
-            <p class="text-muted mb-0">
-                Already have an account?
-                <a href="#login" class="text-decoration-none"
-                   onclick="switchToLogin()">
-                    Sign In
-                </a>
-            </p>
-        </div>
-    </form>
+﻿@model AuthVM
+@* <div class="tab-pane fade" id="register" role="tabpanel"> *@
+<div class="auth-form-header mb-4">
+    <h3>Create New Account</h3>
+    <p class="text-muted">Join our community today</p>
 </div>
 
+<form id="registerForm" method="post" asp-controller="Auth" asp-action="Register">
+    <!-- Name -->
+    <div class="form-group mb-3">
+        <label for="registerName" class="form-label">
+            <i class="bi bi-person-circle me-1"></i> Full Name
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-person"></i>
+            </span>
+            <input type="text" class="form-control" asp-for="Register.Name" placeholder="Enter your full name" required>
+            <span class="text-danger" asp-validation-for="Register.Name"></span>
+        </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group mb-3">
+        <label for="registerEmail" class="form-label">
+            <i class="bi bi-envelope me-1"></i> Email Address
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-at"></i>
+            </span>
+            <input type="email" class="form-control" asp-for="Register.Email" placeholder="Enter your email" required>
+            <span class="text-danger" asp-validation-for="Register.Email"></span>
+        </div>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-group mb-3">
+        <label for="registerPhone" class="form-label">
+            <i class="bi bi-telephone me-1"></i> Phone Number
+        </label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-phone"></i></span>
+            <input type="tel" class="form-control" asp-for="Register.PhoneNumber" placeholder="Enter your phone number" required>
+            <span class="text-danger" asp-validation-for="Register.PhoneNumber"></span>
+        </div>
+    </div>
+
+    <!-- Role Selection -->
+    <div class="form-group mb-3">
+        <label for="registerRole" class="form-label">
+            <i class="bi bi-person-badge me-1"></i> Select Role
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-shield-check"></i>
+            </span>
+            <select class="form-select" asp-for="Register.RoleName" id="registerRole" asp-items="@ViewBag.RoleList" required>
+                <option disabled selected>-- Select Role --</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Register.RoleName"></span>
+        </div>
+        <div class="form-text">
+            <small class="text-muted">
+                <i class="bi bi-info-circle me-1"></i>
+                <span id="roleDescription">
+                    Select your role to determine your access level
+                </span>
+            </small>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group mb-3">
+        <label for="registerPassword" class="form-label">
+            <i class="bi bi-lock me-1"></i> Password
+        </label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-key"></i></span>
+            <input type="password" class="form-control" id="registerPassword" asp-for="Register.Password" placeholder="Create a strong password" required>
+            <span class="text-danger" asp-validation-for="Register.Password"></span>
+            <button class="btn btn-outline-secondary" type="button"
+                    id="toggleRegisterPassword">
+                <i class="bi bi-eye"></i>
+            </button>
+        </div>
+        <div class="password-strength mt-2">
+            <div class="progress" style="height: 5px;">
+                <div class="progress-bar" id="passwordStrengthBar"></div>
+            </div>
+            <small class="text-muted" id="passwordStrengthText">
+                Password strength: None
+            </small>
+        </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group mb-4">
+        <label for="registerConfirmPassword" class="form-label">
+            <i class="bi bi-lock-fill me-1"></i> Confirm Password
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="bi bi-key-fill"></i>
+            </span>
+            <input type="password" class="form-control" id="registerConfirmPassword" name="ConfirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="mt-2">
+            <small class="text-success d-none" id="passwordMatch">
+                <i class="bi bi-check-circle-fill"></i> Passwords match
+            </small>
+            <small class="text-danger d-none" id="passwordMismatch">
+                <i class="bi bi-exclamation-circle-fill"></i> Passwords don't match
+            </small>
+        </div>
+    </div>
+
+    <!-- Terms Agreement -->
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox"
+               id="agreeTerms" required>
+        <label class="form-check-label" for="agreeTerms">
+            I agree to the
+            <a href="#" class="text-decoration-none">Terms of Service</a>
+            and
+            <a href="#" class="text-decoration-none">Privacy Policy</a>
+        </label>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success w-100 mb-3">
+        <i class="bi bi-person-plus me-2"></i>
+        Create Account
+    </button>
+
+    <!-- Already have account -->
+    <div class="text-center">
+        <p class="text-muted mb-0">
+            Already have an account?
+            <a href="#login" class="text-decoration-none"
+               onclick="switchToLogin()">
+                Sign In
+            </a>
+        </p>
+    </div>
+</form>
+@* </div> *@
 <script src="~/js/Auth/Register.js"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
