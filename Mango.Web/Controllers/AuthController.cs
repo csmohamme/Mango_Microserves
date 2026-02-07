@@ -4,6 +4,7 @@ using Mango.Web.Utility;
 using Mango.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace Mango.Web.Controllers
 {
@@ -41,7 +42,25 @@ namespace Mango.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AuthVM model)
         {
-            return View();
+            foreach (var key in ModelState.Keys.Where(k => !k.StartsWith("Login.")).ToList())
+            {
+                ModelState.Remove(key);
+            }
+            if (ModelState.IsValid)
+            {
+                ResponseDto responseDto = await _authService.LoginAsync(model.Login);
+                if (responseDto != null && responseDto.IsSuccess)
+                {
+                    LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
+                    TempData["success"] = "Login Successful";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = responseDto?.Message ?? "Login failed";
+                }
+            }
+            return View("Index", model);
         }
 
         // ============================================== Register ============================================= 

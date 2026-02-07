@@ -16,8 +16,8 @@
                 <i class="bi bi-person"></i>
             </span>
             <input type="text" class="form-control" asp-for="Register.Name" placeholder="Enter your full name" required>
-            <span class="text-danger" asp-validation-for="Register.Name"></span>
         </div>
+        <span class="text-danger" asp-validation-for="Register.Name"></span>
     </div>
 
     <!-- Email -->
@@ -30,8 +30,8 @@
                 <i class="bi bi-at"></i>
             </span>
             <input type="email" class="form-control" asp-for="Register.Email" placeholder="Enter your email" required>
-            <span class="text-danger" asp-validation-for="Register.Email"></span>
         </div>
+            <span class="text-danger" asp-validation-for="Register.Email"></span>
     </div>
 
     <!-- Phone Number -->
@@ -42,8 +42,8 @@
         <div class="input-group">
             <span class="input-group-text"><i class="bi bi-phone"></i></span>
             <input type="tel" class="form-control" asp-for="Register.PhoneNumber" placeholder="Enter your phone number" required>
-            <span class="text-danger" asp-validation-for="Register.PhoneNumber"></span>
         </div>
+            <span class="text-danger" asp-validation-for="Register.PhoneNumber"></span>
     </div>
 
     <!-- Role Selection -->
@@ -58,8 +58,8 @@
             <select class="form-select" asp-for="Register.RoleName" id="registerRole" asp-items="@ViewBag.RoleList" required>
                 <option disabled selected>-- Select Role --</option>
             </select>
-            <span class="text-danger" asp-validation-for="Register.RoleName"></span>
         </div>
+            <span class="text-danger" asp-validation-for="Register.RoleName"></span>
         <div class="form-text">
             <small class="text-muted">
                 <i class="bi bi-info-circle me-1"></i>
@@ -78,12 +78,12 @@
         <div class="input-group">
             <span class="input-group-text"><i class="bi bi-key"></i></span>
             <input type="password" class="form-control" id="registerPassword" asp-for="Register.Password" placeholder="Create a strong password" required>
-            <span class="text-danger" asp-validation-for="Register.Password"></span>
             <button class="btn btn-outline-secondary" type="button"
                     id="toggleRegisterPassword">
                 <i class="bi bi-eye"></i>
             </button>
         </div>
+            <span class="text-danger" asp-validation-for="Register.Password"></span>
         <div class="password-strength mt-2">
             <div class="progress" style="height: 5px;">
                 <div class="progress-bar" id="passwordStrengthBar"></div>

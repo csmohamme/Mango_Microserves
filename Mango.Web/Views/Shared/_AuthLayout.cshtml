@@ -12,45 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-    <style>
-        :root {
-            --primary-color: #FF6B35;
-            --primary-rgb: 255, 107, 53;
-            --secondary-color: #FFA500;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
-        }
-
-        /* Override Bootstrap focus colors */
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--primary-color) !important;
-            box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25) !important;
-        }
-
-        .btn:focus {
-            box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25) !important;
-        }
-
-        .form-check-input:checked {
-            background-color: var(--primary-color) !important;
-            border-color: var(--primary-color) !important;
-        }
-
-        .form-check-input:focus {
-            box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25) !important;
-        }
-    </style>
+   <link rel="stylesheet" href="~/css/Auth/Main.css" />
 </head>
 <body>
     <!-- Render the main content -->
@@ -65,7 +27,7 @@
             "closeButton": true,
             "progressBar": true,
             "positionClass": "toast-top-right",
-            "timeOut": "3000"
+            "timeOut": "5000"
         };
 
         document.addEventListener('DOMContentLoaded', function() {
